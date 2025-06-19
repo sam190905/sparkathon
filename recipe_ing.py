@@ -19,3 +19,6 @@ def recipe(dish : str):
 ])
     return json.JSONDecoder().decode(response.message.content)
     
+
+if __name__ == '__main__':
+    print(recipe('pulao'))
