@@ -1,0 +1,7 @@
+#root {
+  background-image: url("/background.jpg");
+  background-size: cover;        /* Ensures it covers the full screen */
+  background-position: center;   /* Centers the image */
+  background-repeat: no-repeat;  /* Prevents tiling */
+  min-height: 100vh;             /* Makes sure it takes at least full viewport height */
+}

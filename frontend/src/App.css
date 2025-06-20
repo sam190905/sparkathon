@@ -1,0 +1,121 @@
+/* App.css */
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #f0f4f8;
+}
+
+.header {
+  text-align: center;
+  padding: 2rem 1rem 1rem;
+  font-size: 50px;
+  font-family: 'Georgia', serif;
+  color: white;
+  background-color: transparent;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem 1rem;
+}
+
+.form {
+  display: flex;
+  gap: 0.5rem;
+  width: 100%;
+  max-width: 600px;
+  margin-top: 1.5rem;
+}
+
+.input {
+  flex-grow: 1;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+  transition: border 0.2s ease-in-out;
+}
+
+.input:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 4px rgba(40, 167, 69, 0.4);
+}
+
+.button {
+  padding: 0.75rem 1.25rem;
+  font-size: 1rem;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #218838;
+}
+
+.card {
+  background-color: white;
+  color: #333;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  width: 100%;
+}
+
+.card h2 {
+  margin-top: 0;
+  color: #2c3e50;
+}
+
+
+.section {
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.section:last-child {
+  border-bottom: none;
+}
+
+.section h2 {
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+  border-left: 4px solid #28a745;
+  padding-left: 0.5rem;
+}
+
+.section ul,
+.section ol {
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.section li {
+  margin-bottom: 0.75rem;
+  line-height: 1.6;
+  font-size: 1rem;
+  list-style-type: disc;
+}
+
+.section a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.section a:hover {
+  text-decoration: underline;
+  color: #0056b3;
+}
