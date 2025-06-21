@@ -34,13 +34,13 @@ function App() {
     setData(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/recipe", {
-        method: "POST",
+      const response = await fetch(`http://127.0.0.1:5000/api/recipe/${dish}`, {
+        method: "GET",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dish }),
       });
 
       const result = await response.json();
+      console.log(result);
       setData(result);
     } catch (error) {
       alert("Error fetching recipe.");
@@ -77,8 +77,7 @@ function App() {
               <ul>
                 {data.ingredients.map((item, index) => (
                   <li key={index}>
-                    <strong>{item.name}</strong>
-                    {item.notes && ` (${item.notes})`} – {item.quantity} –{" "}
+                    <strong>{item}</strong> {" - "}
                     <a
                       href={`https://www.walmart.com/search?q=${encodeURIComponent(
                         item.name

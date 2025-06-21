@@ -10,7 +10,7 @@ params = {
 
 
 def recipe_listings(dish : str):
-    response: ChatResponse = chat(model='spark', format='json',messages=[
+    response: ChatResponse = chat(model='phi3', format='json',messages=[
   {
     'role': 'user',
     'content': f'{dish}'
