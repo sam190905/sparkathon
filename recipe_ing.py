@@ -1,5 +1,4 @@
 from ollama import chat
-from ollama import ChatResponse
 import json
 
 
@@ -14,4 +13,5 @@ def recipe(dish : str):
     
 
 if __name__ == '__main__':
-    print(recipe('pulao'))
+    result = recipe('pulao')
+    print("\n\nParsed JSON Result:\n", result)

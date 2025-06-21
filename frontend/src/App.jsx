@@ -5,15 +5,16 @@ function App() {
   const [dish, setDish] = useState("");
   const [data, setData] = useState({
     ingredients: [
-      { name: "Pasta (Spaghetti or your favorite shape)", quantity: "200g" },
-      { name: "Olive Oil", quantity: "2 tbsp" },
-      { name: "Garlic", notes: "minced", quantity: "2 cloves" },
-      { name: "Cherry Tomatoes", notes: "halved", quantity: "250g" },
-      { name: "Fresh Basil", notes: "chopped", quantity: "1/4 cup" },
-      { name: "Parmesan Cheese", notes: "grated", quantity: "To taste" },
-      { name: "Salt", quantity: "To taste" },
-      { name: "Black Pepper", quantity: "To taste" },
+      "Pasta (Spaghetti or your favorite shape)",
+      "Olive Oil",
+      "Garlic",
+      "Cherry Tomatoes",
+      "Fresh Basil",
+      "Parmesan Cheese",
+      "Salt",
+      "Black Pepper",
     ],
+
     recipe: [
       "Bring a large pot of salted water to a boil. Add the pasta and cook according to package directions until al dente.",
       "While the pasta is cooking, heat olive oil in a large skillet over medium heat.",
@@ -37,9 +38,11 @@ function App() {
       const response = await fetch("http://localhost:5000/api/recipe/"+encodeURIComponent(dish) );
 
       const result = await response.json();
+      console.log(result);
       setData(result);
       console.log(result)
     } catch (error) {
+      console.log(error);
       alert("Error fetching recipe.");
     }
 
@@ -74,11 +77,10 @@ function App() {
               <ul>
                 {data.ingredients.map((item, index) => (
                   <li key={index}>
-                    <strong>{item.name}</strong>
-                    {item.notes && ` (${item.notes})`} – {item.quantity} –{" "}
+                    <strong>{item}</strong> {" - "}
                     <a
                       href={`https://www.walmart.com/search?q=${encodeURIComponent(
-                        item.name
+                        item
                       )}`}
                       target="_blank"
                       rel="noopener noreferrer"

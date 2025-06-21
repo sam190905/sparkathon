@@ -1,6 +1,7 @@
 import flask
 from flask_cors import CORS
 import json
+from flask_cors import CORS  
 from recipe_ing import recipe
 from listings import recipe_listings
 from urllib.parse import unquote
