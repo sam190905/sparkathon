@@ -1,9 +1,11 @@
 import flask
 import json
+from flask_cors import CORS  
 from recipe_ing import recipe
 from listings import recipe_listings
 
 app = flask.Flask('test')
+CORS(app)
 
 @app.route('/api/recipe/<dish>',methods =['GET'])
 def show_recipe(dish):
