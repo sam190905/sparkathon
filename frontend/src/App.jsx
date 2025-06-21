@@ -34,14 +34,11 @@ function App() {
     setData(null);
 
     try {
-      const response = await fetch("http://localhost:5000/api/recipe", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ dish }),
-      });
+      const response = await fetch("http://localhost:5000/api/recipe/"+encodeURIComponent(dish) );
 
       const result = await response.json();
       setData(result);
+      console.log(result)
     } catch (error) {
       alert("Error fetching recipe.");
     }

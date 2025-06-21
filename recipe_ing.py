@@ -4,20 +4,13 @@ import json
 
 
 def recipe(dish : str):
-    response: ChatResponse = chat(model='gemma3', format='json',messages=[
+  response: ChatResponse = chat(model='spark', format='json',messages=[
   {
     'role': 'user',
-    'content': f'''
-    Generate a JSON object with ingredients and a short recipe for "{dish}". Format:
-
-{{
-  "ingredients": [...],
-  "recipe": [...]
-}}
-''',
+    'content': f'{dish}'
   },
 ])
-    return json.JSONDecoder().decode(response.message.content)
+  return json.JSONDecoder().decode(response.message.content)
     
 
 if __name__ == '__main__':
