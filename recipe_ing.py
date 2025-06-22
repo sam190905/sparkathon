@@ -1,4 +1,5 @@
 from ollama import chat
+from ollama import ChatResponse
 import json
 
 

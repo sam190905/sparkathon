@@ -3,11 +3,13 @@ from ollama import ChatResponse
 import json
 import requests
 from urllib.parse import quote
+import time
 
 from recipe_ing import recipe
 
 params = {
     "apikey": "ccc52268483011bdb5f33783f026b6b212332aa9",
+    'tld' : '.com'
 }
 
 def exist_check(x):
@@ -15,13 +17,15 @@ def exist_check(x):
 
 
 def recipe_listings(dish : str):
+    print(time.time())
     rec = recipe(dish=dish)
+    print(time.time())
     for ingredient in rec['ingredients']:
         ingredient : dict
         # ingredient : dict with item and quantity
         api_endpoint = f"https://ecommerce.api.zenrows.com/v1/targets/walmart/discovery/{quote(ingredient['name'])}"
         response = requests.get(api_endpoint,params)
-        # print(response.text)~
+        print(response.text)
         data : dict= json.JSONDecoder().decode(response.text)
         ingredient['listings'] = []
         for product in data['products_list']:
@@ -37,9 +41,10 @@ def recipe_listings(dish : str):
             if len(ingredient['listings']) >= 3:
                 break
     
+    print(time.time())
     return rec
 
     
 
 if __name__ == '__main__':
-    print(recipe_listings('grilled cheese sandwich'))
+    print(recipe_listings('Butter Chicken'))
