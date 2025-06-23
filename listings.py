@@ -4,6 +4,7 @@ import json
 import requests
 from urllib.parse import quote
 import time
+from multiprocessing import Pool
 
 from recipe_ing import recipe
 
@@ -15,19 +16,16 @@ params = {
 def exist_check(x):
     return x if x else None
 
-
-def recipe_listings(dish : str):
-    print(time.time())
-    rec = recipe(dish=dish)
-    print(time.time())
-    for ingredient in rec['ingredients']:
-        ingredient : dict
-        # ingredient : dict with item and quantity
-        api_endpoint = f"https://ecommerce.api.zenrows.com/v1/targets/walmart/discovery/{quote(ingredient['name'])}"
-        response = requests.get(api_endpoint,params)
-        print(response.text)
+def fetch(url : str) -> dict:
+    response = requests.get(url,params)
+    try:
         data : dict= json.JSONDecoder().decode(response.text)
-        ingredient['listings'] = []
+    except json.decoder.JSONDecodeError:
+        print(url)
+        print(response.text)
+        return []
+    ret_list = []
+    try:
         for product in data['products_list']:
             # print(product.keys())
             listing = {
@@ -37,14 +35,33 @@ def recipe_listings(dish : str):
                 'image_url' : product['product_image'] if 'product_image' in product else None,
                 'rating' : product['rating_score'] if 'rating_score' in product else None
             }
-            ingredient['listings'].append(listing)
-            if len(ingredient['listings']) >= 3:
+            ret_list.append(listing)
+            if len(ret_list) >= 3:
                 break
+    except KeyError:
+        print(data)
     
+    return ret_list
+
+
+
+
+def recipe_listings(dish : str):
+    print(time.time())
+    rec = recipe(dish=dish)
+    print(time.time())
+    urls = [f"https://ecommerce.api.zenrows.com/v1/targets/walmart/discovery/{quote(ingredient['name'])}" for ingredient in rec['ingredients']]
+    with Pool(processes=4) as pool:
+        listings = pool.map(fetch,urls)
+        for i in range(len(listings)):
+            
+            rec['ingredients'][i]['listings'] = listings[i]
+
+
     print(time.time())
     return rec
 
     
 
 if __name__ == '__main__':
-    print(recipe_listings('Butter Chicken'))
+    print(recipe_listings('White Sauce Pasta'))
